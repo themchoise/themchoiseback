@@ -22,8 +22,9 @@ public class ThemchoisebackendApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://themchoiseangularfront.web.app").allowedMethods("GET", "POST", "PUT","OPTIONS");
+				registry.addMapping("/**").allowedOrigins("https://themchoiseangularfront.web.app/", "https://maximilianojoyce.com.ar/").allowedMethods("GET", "POST", "PUT","OPTIONS");
 			}
 		};
 	}
+
 }
