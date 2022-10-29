@@ -31,7 +31,7 @@ public class JobsController {
             jobsDataService.editJobs(job);
             return new Data(true, null, null);
         }catch (Exception  ex){
-            return new Data(false, null, "Error al editar Jobs, pollo que estas haciendo ?");
+            return new Data(false, null, "Error al editar Jobs, pollo que estas haciendo XX?");
         }
 
     }

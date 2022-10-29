@@ -28,6 +28,7 @@ public class EducationController {
             System.out.println(token);
 
             if ( !valtok.validate(token) ){
+
                 return new Data(false, null, "Error Indefinido");
             }
 
