@@ -16,24 +16,11 @@ public class PortFolioData implements IPersonDataService {
         @PersistenceContext
         private EntityManager entityManager;
 
-
-        @Autowired
+       @Autowired
         public PersonDataRepository portFolioRepo;
 
         @Override
         public List<Person> verDatos() {
-/*
-                String query = "SELECT nombre, apellido, about_me FROM persona";
-                List<Me> lista = entityManager.createQuery(query)
-                        .getResultList();
-                if ( lista.isEmpty()){
-                        return null;
-                }
-
-                return lista;
-        }
-
- */
 
                 return portFolioRepo.findAll();
         }

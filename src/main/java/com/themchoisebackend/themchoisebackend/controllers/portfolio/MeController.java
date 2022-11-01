@@ -40,7 +40,6 @@ public class MeController {
 
     try {
         personDataService.editAboutMe(pers);
-
         return new Data(true, null, null);
     }catch (Exception  ex){
           return new Data(false, null, "Error in Save About");
