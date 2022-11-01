@@ -13,6 +13,7 @@ public class EducationController {
 
         @Autowired
         private IEducationService educationService;
+    @Autowired
         private ValidateToken valtok;
 
         @GetMapping("/education/listEducation")
@@ -25,7 +26,7 @@ public class EducationController {
     @PutMapping("/edit/education")
     @ResponseBody
     public Data editEducation(@RequestHeader(value="Authorization")String token, @RequestBody Education educ)  throws ClassNotFoundException {
-            System.out.println(token);
+            System.out.println(educ);
 
             if ( !valtok.validate(token) ){
 
