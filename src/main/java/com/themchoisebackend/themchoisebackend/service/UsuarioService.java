@@ -52,10 +52,7 @@ public class UsuarioService implements IUserService {
     }
 
     @Override
-    public void crearUsuario(User usr) {
+    public void crearUsuario(User usr){
         usuarioRepo.save(usr);
     }
-
-
-
 }

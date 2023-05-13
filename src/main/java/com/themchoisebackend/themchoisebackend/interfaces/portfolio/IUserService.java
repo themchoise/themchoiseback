@@ -12,8 +12,4 @@ public interface IUserService {
 
      void crearUsuario(User usr);
 
-
-
-
-
 }

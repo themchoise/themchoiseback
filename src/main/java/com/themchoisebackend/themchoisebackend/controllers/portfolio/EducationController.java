@@ -4,7 +4,9 @@ import com.themchoisebackend.themchoisebackend.interfaces.portfolio.IEducationSe
 import com.themchoisebackend.themchoisebackend.models.Data;
 import com.themchoisebackend.themchoisebackend.models.portfolio.Education;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,8 +27,8 @@ public class EducationController {
 
     @PutMapping("/edit/education")
     @ResponseBody
-    public Data editEducation(@RequestHeader(value="Authorization")String token, @RequestBody Education educ)  throws ClassNotFoundException {
-            System.out.println(educ);
+    public Data editEducation(@RequestHeader(value="Authorization")String token, @RequestBody Education educ)  {
+
 
             if ( !valtok.validate(token) ){
 
@@ -37,10 +39,31 @@ public class EducationController {
             educationService.editEducation(educ);
             return new Data(true, null, null);
         }catch (Exception  ex){
-            return new Data(false, null, "Error al editar Jobs, pollo que estas haciendo ?");
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
         }
 
     }
+
+    @PutMapping("/remove/education")
+    @ResponseBody
+    public Data removeEducation(@RequestHeader(value="Authorization")String token, @RequestBody Education educ) {
+
+
+        if ( !valtok.validate(token) ){
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
+        }
+
+        try {
+            educationService.removeEducation(educ);
+            return new Data(true, null, null);
+        }catch (Exception  ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
+        }
+
+    }
+
 
     }
 

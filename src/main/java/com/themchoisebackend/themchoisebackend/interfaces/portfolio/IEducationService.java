@@ -7,4 +7,5 @@ public interface IEducationService {
     public List<Education> verDatos();
 
     public void editEducation(Education job);
+    public void removeEducation(Education job);
 }

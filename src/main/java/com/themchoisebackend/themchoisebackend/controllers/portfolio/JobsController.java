@@ -5,7 +5,9 @@ import com.themchoisebackend.themchoisebackend.interfaces.portfolio.IJobsDataSer
 import com.themchoisebackend.themchoisebackend.models.Data;
 import com.themchoisebackend.themchoisebackend.models.portfolio.Jobs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,19 +21,40 @@ public class JobsController {
 
     @PutMapping("/edit/kingKongJobs")
     @ResponseBody
-    public Data editAboutMe(@RequestHeader(value="Authorization")String token, @RequestBody Jobs job)  throws ClassNotFoundException {
 
-        System.out.println(token);
+    public Data editJobs(@RequestHeader(value="Authorization")String token, @RequestBody Jobs job)  throws ClassNotFoundException {
+
+
 
         if ( !valtok.validate(token) ){
             return new Data(false, null, "Error Indefinido");
         }
 
+
         try {
             jobsDataService.editJobs(job);
             return new Data(true, null, null);
         }catch (Exception  ex){
-            return new Data(false, null, "Error al editar Jobs, pollo que estas haciendo XX?");
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
+        }
+
+    }
+    @PutMapping("/remove/kingKongJobs")
+    @ResponseBody
+    public Data removeJobs(@RequestHeader(value="Authorization")String token, @RequestBody Jobs job)  throws ClassNotFoundException {
+
+        if ( !valtok.validate(token) ){
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
+        }
+
+        try {
+            jobsDataService.removeJobs(job);
+            return new Data(true, null, null);
+        }catch (Exception  ex){
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parametros Invalidos");
         }
 
     }

@@ -29,6 +29,12 @@ public class EducationService implements IEducationService {
         educRepo.save(educ);
 
     }
+
+    public void removeEducation(Education educ) {
+        educRepo.delete(educ);
+
+    }
+
 }
 
 

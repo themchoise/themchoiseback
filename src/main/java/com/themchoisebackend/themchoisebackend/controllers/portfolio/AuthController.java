@@ -5,6 +5,8 @@ import com.themchoisebackend.themchoisebackend.models.AuthData;
 import com.themchoisebackend.themchoisebackend.models.Data;
 import com.themchoisebackend.themchoisebackend.models.User;
 import com.themchoisebackend.themchoisebackend.utils.JWTUtil;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +55,7 @@ public class AuthController {
     public Data registrarUsuario(@RequestBody User usr){
 
         try{
-            System.out.println(usr.getData());
+
             Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
             String hash = argon2.hash(1,1024,1, usr.getPassword());
             usr.setPassword(hash);
@@ -74,7 +76,7 @@ public class AuthController {
     @PostMapping("/login")
     public AuthData login(@RequestBody User usr){
 
-        System.out.println(usr.getData());
+
         AuthData authResponse = new AuthData();
 
         User usrLogin =  usuarioService.findbyLoginName(usr);
@@ -92,6 +94,26 @@ public class AuthController {
             authResponse.setOk(false);
             return authResponse;
         }
+
+    }
+
+    @PostMapping("/registrar/usuario")
+    public Data registrarUsuario(@RequestBody User usr){
+
+
+        try{
+
+            Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+            String hash = argon2.hash(1,1024,1, usr.getPassword());
+
+            usr.setPassword(hash);
+            usuarioService.crearUsuario(usr);
+            Data datares  = new Data(true, null,null);
+            return datares;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

@@ -34,6 +34,10 @@ public class Education {
         this.description=description;
     }
 
+    public long returnId (){
+      return this.id;
+    };
+
 
 
 }

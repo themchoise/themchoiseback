@@ -24,11 +24,11 @@ public class JobsService implements IJobsDataService {
     }
 
     @Override
-    public void editJobs(Jobs job) {
-        jobsRepo.save(job);
+    public void editJobs(Jobs job) {jobsRepo.save(job); }
 
+    @Override
+    public void removeJobs(Jobs job) {jobsRepo.delete(job); }
 
-    }
 
 }
 

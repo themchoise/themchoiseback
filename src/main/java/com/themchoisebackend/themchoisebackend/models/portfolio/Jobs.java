@@ -34,5 +34,7 @@ public class Jobs {
     }
 
 
-
+    public long returnId() {
+        return this.id;
+    }
 }

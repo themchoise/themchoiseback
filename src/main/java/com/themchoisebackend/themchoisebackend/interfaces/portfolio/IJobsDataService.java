@@ -7,6 +7,8 @@ public interface IJobsDataService {
     public List<Jobs> verDatos();
 
     public void editJobs(Jobs job);
+    public void removeJobs(Jobs job);
+
 
 }
 
